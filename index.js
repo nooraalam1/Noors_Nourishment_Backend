@@ -1,7 +1,7 @@
 const express = require('express')
 const app = express()
 const port = process.env.PORT || 3000
-
+var cors = require('cors')
 //middleware
 app.use(cors())
 app.use(express.json())
