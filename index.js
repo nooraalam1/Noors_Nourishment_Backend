@@ -20,3 +20,13 @@ app.get('/', (req, res) => {
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
+
+//Add to cart
+app.post('/addtocart',(req,res)=>{
+  const {_id,email,name,image,description,price} = req.body
+  const q = 'INSERT INTO cart(_id,email,name,image,description,price) VALUES (?,?,?,?,?,?)'
+  db.query(q, [_id,email,name,image,description,price],(err,data)=>{
+  if(err) return res.json(err)
+  return res.json(data) 
+  })
+  })
