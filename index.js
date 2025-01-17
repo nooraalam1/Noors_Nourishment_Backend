@@ -30,3 +30,30 @@ app.post('/addtocart',(req,res)=>{
   return res.json(data) 
   })
   })
+
+//Cart Items Fetch
+// app.get('/cartItems', (req, res) => {
+
+//   const q = "SELECT * FROM cart ";
+//   db.query(q,  (err, data) => {
+//     if (err) {
+//       console.error(err);
+//       return res.status(500).json({ error: "Database query failed" });
+//     }
+//     return res.status(200).json(data);
+//   });
+// });
+
+
+app.get('/cartItems', (req, res) => {
+  const { email } = req.query;
+
+  const q = "SELECT * FROM cart WHERE email = ?";
+  db.query(q, [email], (err, data) => {
+    if (err) {
+      console.error(err);
+      return res.status(500).json({ error: "Database query failed" });
+    }
+    return res.status(200).json(data);
+  });
+});
