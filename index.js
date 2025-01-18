@@ -32,18 +32,6 @@ app.post('/addtocart',(req,res)=>{
   })
 
 //Cart Items Fetch
-// app.get('/cartItems', (req, res) => {
-
-//   const q = "SELECT * FROM cart ";
-//   db.query(q,  (err, data) => {
-//     if (err) {
-//       console.error(err);
-//       return res.status(500).json({ error: "Database query failed" });
-//     }
-//     return res.status(200).json(data);
-//   });
-// });
-
 
 app.get('/cartItems', (req, res) => {
   const { email } = req.query;
@@ -57,3 +45,20 @@ app.get('/cartItems', (req, res) => {
     return res.status(200).json(data);
   });
 });
+
+
+
+app.delete('/cartItems', (req, res) => {
+  const { email, id } = req.query; 
+
+  const sqlQuery = "DELETE FROM cart WHERE email = ? AND _id = ?";
+
+  db.query(sqlQuery, [email, id], (err, result) => {
+      if (err) {
+        console.log(err)
+          return res.status(500).send('Error deleting cart item');
+      }
+      res.status(200).send('Cart item deleted successfully');
+  });
+});
+
