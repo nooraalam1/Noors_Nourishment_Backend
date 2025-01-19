@@ -1,1 +1,2 @@
-# You Should Also ADD dotenv and cors using npm i env cors
+# Also ADD dotenv, cors , mysql2 using 
+  npm i env cors mysql2
